@@ -27,10 +27,9 @@ typedef struct	s_game
 	void		*mlx_ptr;
 	void		*win_ptr;
 	void		*img_ptr;
-	char		word[WORD_BUFFER][WORD_BUFFER];
-	t_wall		*walls;
-	double		position[2];
-	double		direction[2];
+	char		world[WORD_BUFFER][WORD_BUFFER];
+	double	position[2];
+	double	direction[2];
 	char		flags;
 }				t_game;
 
