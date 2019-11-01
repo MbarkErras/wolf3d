@@ -24,6 +24,7 @@ typedef struct	s_game
 {
 	void		*mlx_ptr;
 	void		*win_ptr;
+	void		*img_ptr;
 	char		flags;
 }				t_game;
 
