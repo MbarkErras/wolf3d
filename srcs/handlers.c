@@ -14,5 +14,6 @@
 
 void	load_home(t_game *w)
 {
-	//	
+
+
 }

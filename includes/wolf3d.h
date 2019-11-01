@@ -42,8 +42,9 @@ typedef struct	s_game
 	char		flags;
 }				t_game;
 
-# define RANDON 0
+# define RANDOM 0
 # define GAMEPLAY 1
+# define FIRST_TIME 2
 
 int				exit_cleanup(void *w);
 char			**read_world(int fd);
