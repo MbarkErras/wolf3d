@@ -1,18 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   handlers.c                                         :+:      :+:    :+:   */
+/*   renderer_utilities.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: merras <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/11/01 19:46:40 by merras            #+#    #+#             */
-/*   Updated: 2019/11/01 21:56:19 by merras           ###   ########.fr       */
+/*   Created: 2019/11/01 21:45:45 by merras            #+#    #+#             */
+/*   Updated: 2019/11/01 21:56:22 by merras           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "wolf3d.h"
 
-void	load_home(t_game *w)
+char	**read_world(int fd)
 {
-	//	
+	char	buffer[4096];
+	char	*world_raw;
+
+	world_raw = NULL;
+	while (read(fd, buffer, 4096))
+		world_raw = ft_strjoin_free(word_raw, buffer, 1);
+	return (ft_strsplit(word_raw, '\n'));
 }

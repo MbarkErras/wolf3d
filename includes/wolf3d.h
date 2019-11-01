@@ -6,7 +6,7 @@
 /*   By: merras <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/01 19:19:34 by merras            #+#    #+#             */
-/*   Updated: 2019/11/01 21:33:20 by merras           ###   ########.fr       */
+/*   Updated: 2019/11/01 21:56:31 by merras           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 # define WIDTH 500
 # define HEIGHT 500
 
-# define WORD_BUFFER 20
+# define WORLD_BUFFER 10
 
 /*
 ** TEXTURES MACROS
@@ -36,15 +36,17 @@ typedef struct	s_game
 	void		*mlx_ptr;
 	void		*win_ptr;
 	void		*img_ptr;
-	char		word[WORD_BUFFER][WORD_BUFFER];
+	char		**world;
 	double		position[2];
 	double		direction[2];
 	char		flags;
 }				t_game;
 
-# define GAMEPLAY 0
+# define RANDON 0
+# define GAMEPLAY 1
 
 int				exit_cleanup(void *w);
+char			**read_world(int fd);
 
 # define F_GET(x, f) (x & (1 << f))
 # define F_BGET(x, f) (x & f)
