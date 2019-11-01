@@ -14,7 +14,7 @@
 static void	init_game(t_game *w)
 {
 	w->mlx_ptr = mlx_init();
-	w->wim_ptr = mlx_new_window(w->mlx_ptr, WIDTH, HEIGHT, EXEC_NAME);
+	w->win_ptr = mlx_new_window(w->mlx_ptr, WIDTH, HEIGHT, EXEC_NAME);
 	//arrow hooks
 	//esc hook
 	//mouse hook
