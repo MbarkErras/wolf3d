@@ -6,7 +6,7 @@
 /*   By: merras <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/01 19:19:34 by merras            #+#    #+#             */
-/*   Updated: 2019/11/01 20:13:01 by merras           ###   ########.fr       */
+/*   Updated: 2019/11/01 20:44:27 by merras           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,8 @@ typedef struct	s_walls
 }				t_walls;
 
 # define GAMEPLAY 0
+
+int				exit_cleanup(void *w);
 
 # define F_GET(x, f) (x & (1 << f))
 # define F_BGET(x, f) (x & f)

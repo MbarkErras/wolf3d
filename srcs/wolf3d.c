@@ -6,18 +6,18 @@
 /*   By: merras <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/01 19:19:29 by merras            #+#    #+#             */
-/*   Updated: 2019/11/01 20:13:12 by merras           ###   ########.fr       */
+/*   Updated: 2019/11/01 20:44:33 by merras           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "wolf3d.h"
 
-static int		red_cross(t_game *w)
+int			exit_cleanup(void *w)
 {
-	mlx_clear_window(w->mlx_ptr, w->win_ptr);
-	mlx_destroy_image(w->mlx_ptr, w->img_ptr);
+	mlx_clear_window(((t_game *)w)->mlx_ptr, ((t_game *)w)->win_ptr);
+	mlx_destroy_image(((t_game *)w)->mlx_ptr, ((t_game *)w)->img_ptr);
+	//cleanup;
 	exit(0);
-	return (0);
 }
 
 static void	init_game(t_game *w)
@@ -29,8 +29,7 @@ static void	init_game(t_game *w)
 	//esc hook
 	//mouse hook
 	//enter hook
-	mlx_hook(w->win_ptr, 17, 1, red_cross, w);
-	mlx_loop(w->mlx_ptr);
+	mlx_hook(w->win_ptr, 17, 1, exit_cleanup, w);
 }
 
 int			main(void)
@@ -38,6 +37,6 @@ int			main(void)
 	t_game	wolf3d;
 
 	init_game(&wolf3d);
-	// load_home(&wolf3d);
-	return (0);
+	//load_home(&wolf3d);
+	mlx_loop(wolf3d.mlx_ptr);
 }
