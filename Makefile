@@ -17,6 +17,7 @@ all: $(NAME)
 
 $(NAME): $(OBJS_PATH) $(INCLUDES)/wolf3d.h
 	make -C $(LIBS_DIR)/centropy
+	make -C $(LIBS_DIR)/simplist
 	gcc $(OBJS_PATH) $(LIBS_DIR)/simplist/simplist.a $(LIBS_DIR)/centropy/centropy.a -lmlx -framework openGL -framework AppKit -o $(NAME)
 
 $(OBJS_PATH): $(OBJS_DIR)/%.o : $(SRCS_DIR)/%.c | $(OBJS_DIR)
