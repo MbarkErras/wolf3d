@@ -26,6 +26,6 @@ int			main(void)
 	t_game	wolf3d;
 
 	init_game(&wolf3d);
-	load_home(&wolf3d);
+	// load_home(&wolf3d);
 	return (0);
 }

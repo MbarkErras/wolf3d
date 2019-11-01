@@ -15,7 +15,7 @@ FLAGS= -Wall -Werror -Wextra
 
 all: $(NAME)
 
-$(NAME): $(OBJS_PATH) $(INCLUDES)/fractol.h
+$(NAME): $(OBJS_PATH) $(INCLUDES)/wolf3d.h
 	make -C $(LIBS_DIR)/centropy
 	gcc $(OBJS_PATH) $(LIBS_DIR)/simplist/simplist.a $(LIBS_DIR)/centropy/centropy.a -lmlx -framework openGL -framework AppKit -o $(NAME)
 
