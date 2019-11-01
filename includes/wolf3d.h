@@ -6,7 +6,7 @@
 /*   By: merras <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/01 19:19:34 by merras            #+#    #+#             */
-/*   Updated: 2019/11/01 21:13:51 by merras           ###   ########.fr       */
+/*   Updated: 2019/11/01 21:56:31 by merras           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,22 +20,33 @@
 # define WIDTH 500
 # define HEIGHT 500
 
-# define WORD_BUFFER 20
+# define WORLD_BUFFER 10
+
+/*
+** TEXTURES MACROS
+** any digit from 0 to 9 represent number of stacked blocks
+*/
+
+# define TREE '*'
+# define WATER 'w'
+# define LAVA 'l'
 
 typedef struct	s_game
 {
 	void		*mlx_ptr;
 	void		*win_ptr;
 	void		*img_ptr;
-	char		world[WORD_BUFFER][WORD_BUFFER];
-	double	position[2];
-	double	direction[2];
+	char		**world;
+	double		position[2];
+	double		direction[2];
 	char		flags;
 }				t_game;
 
-# define GAMEPLAY 0
+# define RANDON 0
+# define GAMEPLAY 1
 
 int				exit_cleanup(void *w);
+char			**read_world(int fd);
 
 # define F_GET(x, f) (x & (1 << f))
 # define F_BGET(x, f) (x & f)
