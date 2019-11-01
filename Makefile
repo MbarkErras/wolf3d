@@ -17,10 +17,10 @@ all: $(NAME)
 
 $(NAME): $(OBJS_PATH) $(INCLUDES)/fractol.h
 	make -C $(LIBS_DIR)/centropy
-	gcc $(OBJS_PATH) $(LIBS_DIR)/centropy/centropy.a -lmlx -framework openGL -framework AppKit -o $(NAME)
+	gcc $(OBJS_PATH) $(LIBS_DIR)/simplist/simplist.a $(LIBS_DIR)/centropy/centropy.a -lmlx -framework openGL -framework AppKit -o $(NAME)
 
 $(OBJS_PATH): $(OBJS_DIR)/%.o : $(SRCS_DIR)/%.c | $(OBJS_DIR)
-	gcc $(FLAGS) -I$(INCLUDES) -c $< -o $@
+	gcc $(FLAGS) -I$(INCLUDES) -I$(LIBS_DIR)/simplist/includes -I$(LIBS_DIR)/centropy/includes -c $< -o $@
 
 $(OBJS_DIR):
 	mkdir $(OBJS_DIR)
