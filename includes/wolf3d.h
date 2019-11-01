@@ -6,7 +6,7 @@
 /*   By: merras <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/01 19:19:34 by merras            #+#    #+#             */
-/*   Updated: 2019/11/01 21:13:51 by merras           ###   ########.fr       */
+/*   Updated: 2019/11/01 21:33:20 by merras           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,13 +22,21 @@
 
 # define WORD_BUFFER 20
 
+/*
+** TEXTURES MACROS
+** any digit from 0 to 9 represent number of stacked blocks
+*/
+
+# define TREE '*'
+# define WATER 'w'
+# define LAVA 'l'
+
 typedef struct	s_game
 {
 	void		*mlx_ptr;
 	void		*win_ptr;
 	void		*img_ptr;
 	char		word[WORD_BUFFER][WORD_BUFFER];
-	t_wall		*walls;
 	double		position[2];
 	double		direction[2];
 	char		flags;
