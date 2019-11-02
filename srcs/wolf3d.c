@@ -16,6 +16,7 @@ int			exit_cleanup(void *w)
 {
 	mlx_clear_window(((t_game *)w)->mlx_ptr, ((t_game *)w)->win_ptr);
 	mlx_destroy_image(((t_game *)w)->mlx_ptr, ((t_game *)w)->img_ptr);
+	mlx_destroy_image(((t_game *)w)->mlx_ptr, ((t_game *)w)->img_menu);
 	//cleanup;
 	exit(0);
 }
@@ -28,26 +29,30 @@ void 	menu_event(int key, t_game *w)
 			w->level++;
 		else
 			w->level = 0;
+		mlx_clear_window(w->mlx_ptr, w->win_ptr);
+		mlx_destroy_image(w->mlx_ptr, w->img_ptr);
+		mlx_destroy_image(w->mlx_ptr, w->img_menu);
+		main_menu(w);
 	}
 	if (key == 123)
 	{
-		if (w->level > 2)
+		if (w->level > 0)
 			w->level--;
 		else
 			w->level = 2;
+		mlx_clear_window(w->mlx_ptr, w->win_ptr);
+		mlx_destroy_image(w->mlx_ptr, w->img_ptr);
+		mlx_destroy_image(w->mlx_ptr, w->img_menu);
+		main_menu(w);
 	}
 }
 
 int		key_press(int key, t_game *w)
 {
-
 	if (key == 124 || key == 123)
 	{
 		if (!F_GET(1, GAMEPLAY))
-		{
 			menu_event(key, w);
-			printf(">> key : %d\n", key);
-		}
 	}
 	if (key == 53)
 		exit_cleanup(w);
@@ -56,13 +61,12 @@ int		key_press(int key, t_game *w)
 
 void 	border(t_game *w)
 {
-	void		*img_menu;
 	int start;
 	int x;
 	int y;
 
-	img_menu = mlx_new_image(w->mlx_ptr, 102, 102);
-	w->data = (int *)mlx_get_data_addr(img_menu, &w->bpp, &w->s_l, &w->endian);
+	w->img_menu = mlx_new_image(w->mlx_ptr, 102, 102);
+	w->data = (int *)mlx_get_data_addr(w->img_menu, &w->bpp, &w->s_l, &w->endian);
 	if (w->level == 0)
 		start = 89;
 	else if (w->level == 1)
@@ -79,8 +83,7 @@ void 	border(t_game *w)
 			x++;
 		}
 	}
-	mlx_put_image_to_window(w->mlx_ptr, w->win_ptr, img_menu, start, 329);
-
+	mlx_put_image_to_window(w->mlx_ptr, w->win_ptr, w->img_menu, start, 329);
 }
 
 void 		main_menu(t_game *w)
@@ -89,6 +92,7 @@ void 		main_menu(t_game *w)
 	int		height;
 	void	*xpm;
 
+	w->img_ptr = mlx_new_image(w->mlx_ptr, WIDTH, HEIGHT);
 	xpm = mlx_xpm_file_to_image (w->mlx_ptr, "./ressources/main.xpm", &width, &height);
 	mlx_put_image_to_window(w->mlx_ptr, w->win_ptr,	xpm, 0, 0);
 	border(w);
@@ -102,13 +106,9 @@ void 		main_menu(t_game *w)
 
 static void	init_game(t_game *w)
 {
-
-
-
 	w->level = 0;
 	w->mlx_ptr = mlx_init();
 	w->win_ptr = mlx_new_window(w->mlx_ptr, WIDTH, HEIGHT, EXEC_NAME);
-	w->img_ptr = mlx_new_image(w->mlx_ptr, WIDTH, HEIGHT);
 	//arrow hooks
 	//esc hook
 	//mouse hook
