@@ -6,7 +6,7 @@
 /*   By: merras <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/01 19:19:29 by merras            #+#    #+#             */
-/*   Updated: 2019/11/02 01:58:47 by merras           ###   ########.fr       */
+/*   Updated: 2019/11/02 16:39:50 by event            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,9 +33,14 @@ static void	init_game(t_game *w)
 	//esc hook
 	//mouse hook
 	//enter hook
-	xpm = mlx_xpm_file_to_image (w->mlx_ptr, "./ressources/test.xpm", &width, &height);
+	xpm = mlx_xpm_file_to_image (w->mlx_ptr, "./ressources/main.xpm", &width, &height);
 	mlx_put_image_to_window(w->mlx_ptr, w->win_ptr,	xpm, 0, 0);
-
+	xpm = mlx_xpm_file_to_image (w->mlx_ptr, "./ressources/level.xpm", &width, &height);
+	mlx_put_image_to_window(w->mlx_ptr, w->win_ptr, xpm, 90, 330);
+	xpm = mlx_xpm_file_to_image (w->mlx_ptr, "./ressources/level.xpm", &width, &height);
+	mlx_put_image_to_window(w->mlx_ptr, w->win_ptr, xpm, width + 90 + 10, 330);
+	xpm = mlx_xpm_file_to_image (w->mlx_ptr, "./ressources/level.xpm", &width, &height);
+	mlx_put_image_to_window(w->mlx_ptr, w->win_ptr, xpm, (width * 2) + 90 + 20, 330);
 	mlx_hook(w->win_ptr, 17, 1, exit_cleanup, w);
 }
 

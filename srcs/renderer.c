@@ -6,7 +6,7 @@
 /*   By: merras <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/01 21:34:49 by merras            #+#    #+#             */
-/*   Updated: 2019/11/02 01:58:44 by merras           ###   ########.fr       */
+/*   Updated: 2019/11/02 16:33:58 by event            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,15 +71,15 @@ void	load_gameplay(int fd, t_game *w)
 	printf("ray: %f %f\n", ray[0], ray[1]);
 	printf("line: %f %f\n", line[0], line[1]);
 	printf("first block to check: %f\n", x);
-	while (x < WIDTH)
-	{
-		y = line[0] * x + line[1] + 0.01;
-		printf(">> %f %f\n", x, y);
-		printf (">>>> x = %d  y = %d", (int)x / 20, (int)y / 20); 
-		if (w->world[(int)y / 20][(int)x / 20] == '1')
-			printf("lah\n");
-		else
-			printf("chitan\n");
-		x += BLOCK_WIDTH;
-	}
+//	while (x < WIDTH)
+//	{
+//		y = line[0] * x + line[1] + 0.01;
+//		printf(">> %f %f\n", x, y);
+//		printf (">>>> x = %d  y = %d", (int)x / 20, (int)y / 20); 
+//		if (w->world[(int)y / 20][(int)x / 20] == '1')
+//			printf("lah\n");
+//		else
+//			printf("chitan\n");
+//		x += BLOCK_WIDTH;
+//	}
 }
