@@ -1,6 +1,10 @@
 NAME=wolf3d
 
-SRCS=wolf3d.c
+SRCS=wolf3d.c \
+	renderer.c \
+	renderer_utilities.c \
+	handlers.c
+
 
 OBJS=$(SRCS:.c=.o)
 
@@ -11,7 +15,7 @@ OBJS_PATH=$(addprefix $(OBJS_DIR)/, $(OBJS))
 SRCS_PATH=$(addprefix $(SRCS_DIR)/, $(SRCS))
 INCLUDES=includes
 
-FLAGS= -Wall -Werror -Wextra
+FLAGS= #-Wall -Werror -Wextra
 
 all: $(NAME)
 
