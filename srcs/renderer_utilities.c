@@ -6,7 +6,7 @@
 /*   By: merras <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/01 21:45:45 by merras            #+#    #+#             */
-/*   Updated: 2019/11/01 21:56:22 by merras           ###   ########.fr       */
+/*   Updated: 2019/11/02 01:58:52 by merras           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,6 @@ char	**read_world(int fd)
 
 	world_raw = NULL;
 	while (read(fd, buffer, 4096))
-		world_raw = ft_strjoin_free(word_raw, buffer, 1);
-	return (ft_strsplit(word_raw, '\n'));
+		world_raw = ft_strjoin_free(world_raw, buffer, 1);
+	return (ft_strsplit(world_raw, '\n'));
 }

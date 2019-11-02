@@ -6,7 +6,7 @@
 /*   By: merras <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/01 19:19:29 by merras            #+#    #+#             */
-/*   Updated: 2019/11/01 21:56:18 by merras           ###   ########.fr       */
+/*   Updated: 2019/11/02 01:58:47 by merras           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,10 @@ int			exit_cleanup(void *w)
 
 static void	init_game(t_game *w)
 {
-	int	width;
-	int	height;
+	int		width;
+	int		height;
 	void	*xpm;
+
 	w->mlx_ptr = mlx_init();
 	w->win_ptr = mlx_new_window(w->mlx_ptr, WIDTH, HEIGHT, EXEC_NAME);
 	w->img_ptr = mlx_new_image(w->mlx_ptr, WIDTH, HEIGHT);
@@ -32,8 +33,9 @@ static void	init_game(t_game *w)
 	//esc hook
 	//mouse hook
 	//enter hook
-	xpm = mlx_xpm_file_to_image (w->mlx_ptr, "test.xpm", &width, &height);
+	xpm = mlx_xpm_file_to_image (w->mlx_ptr, "./ressources/test.xpm", &width, &height);
 	mlx_put_image_to_window(w->mlx_ptr, w->win_ptr,	xpm, 0, 0);
+
 	mlx_hook(w->win_ptr, 17, 1, exit_cleanup, w);
 }
 
@@ -43,5 +45,10 @@ int			main(void)
 
 	init_game(&wolf3d);
 	//load_home(&wolf3d);
+
+	// DEV
+	int fd = open("worlds/world0.map", O_RDONLY);
+	load_gameplay(fd, &wolf3d);
+	//
 	mlx_loop(wolf3d.mlx_ptr);
 }

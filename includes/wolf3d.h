@@ -6,21 +6,29 @@
 /*   By: merras <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/01 19:19:34 by merras            #+#    #+#             */
-/*   Updated: 2019/11/01 21:56:31 by merras           ###   ########.fr       */
+/*   Updated: 2019/11/02 01:59:00 by merras           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef WOLF3D_H
 # define WOLF3D_H
 
+// D E V
+# include <stdio.h>
+// ////
+
+# include <math.h>
 # include "centropy.h"
 # include "mlx.h"
 
 # define EXEC_NAME "wolf3d"
 # define WIDTH 500
 # define HEIGHT 500
+# define BLOCK_WIDTH 20
+# define FOV 90.0
 
-# define WORLD_BUFFER 10
+# define PI 3.14159265359
+# define DEG_TO_RAD(x) (x / 180 * PI)
 
 /*
 ** TEXTURES MACROS
@@ -39,6 +47,7 @@ typedef struct	s_game
 	char		**world;
 	double		position[2];
 	double		direction[2];
+	int			height;
 	char		flags;
 }				t_game;
 
@@ -47,6 +56,11 @@ typedef struct	s_game
 
 int				exit_cleanup(void *w);
 char			**read_world(int fd);
+
+# define INITIAL_X 5.5
+# define INITIAL_Y 5.5
+
+void			load_gameplay(int fd, t_game *w);
 
 # define F_GET(x, f) (x & (1 << f))
 # define F_BGET(x, f) (x & f)
