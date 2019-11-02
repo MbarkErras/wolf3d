@@ -20,12 +20,92 @@ int			exit_cleanup(void *w)
 	exit(0);
 }
 
-static void	init_game(t_game *w)
+void 	menu_event(int key, t_game *w)
+{
+	if (key == 124)
+	{
+		if (w->level < 2)
+			w->level++;
+		else
+			w->level = 0;
+	}
+	if (key == 123)
+	{
+		if (w->level > 2)
+			w->level--;
+		else
+			w->level = 2;
+	}
+}
+
+int		key_press(int key, t_game *w)
+{
+
+	if (key == 124 || key == 123)
+	{
+		if (!F_GET(1, GAMEPLAY))
+		{
+			menu_event(key, w);
+			printf(">> key : %d\n", key);
+		}
+	}
+	if (key == 53)
+		exit_cleanup(w);
+	return (0);
+}
+
+void 	border(t_game *w)
+{
+	void		*img_menu;
+	int start;
+	int x;
+	int y;
+
+	img_menu = mlx_new_image(w->mlx_ptr, 102, 102);
+	w->data = (int *)mlx_get_data_addr(img_menu, &w->bpp, &w->s_l, &w->endian);
+	if (w->level == 0)
+		start = 89;
+	else if (w->level == 1)
+		start = 89 + 100 + 10;
+	else if (w->level == 2)
+		start = 89 + (100 + 10) * 2;
+	y = -1;
+	while (++y < 102)
+	{
+		x = 0;
+		while (x < 102)
+		{
+			w->data[y * 102 + x] = 0x00FF00;
+			x++;
+		}
+	}
+	mlx_put_image_to_window(w->mlx_ptr, w->win_ptr, img_menu, start, 329);
+
+}
+
+void 		main_menu(t_game *w)
 {
 	int		width;
 	int		height;
 	void	*xpm;
 
+	xpm = mlx_xpm_file_to_image (w->mlx_ptr, "./ressources/main.xpm", &width, &height);
+	mlx_put_image_to_window(w->mlx_ptr, w->win_ptr,	xpm, 0, 0);
+	border(w);
+	xpm = mlx_xpm_file_to_image (w->mlx_ptr, "./ressources/level.xpm", &width, &height);
+	mlx_put_image_to_window(w->mlx_ptr, w->win_ptr, xpm, 90, 330);
+	xpm = mlx_xpm_file_to_image (w->mlx_ptr, "./ressources/level.xpm", &width, &height);
+	mlx_put_image_to_window(w->mlx_ptr, w->win_ptr, xpm, width + 90 + 10, 330);
+	xpm = mlx_xpm_file_to_image (w->mlx_ptr, "./ressources/level.xpm", &width, &height);
+	mlx_put_image_to_window(w->mlx_ptr, w->win_ptr, xpm, (width * 2) + 90 + 20, 330);
+}
+
+static void	init_game(t_game *w)
+{
+
+
+
+	w->level = 0;
 	w->mlx_ptr = mlx_init();
 	w->win_ptr = mlx_new_window(w->mlx_ptr, WIDTH, HEIGHT, EXEC_NAME);
 	w->img_ptr = mlx_new_image(w->mlx_ptr, WIDTH, HEIGHT);
@@ -33,15 +113,9 @@ static void	init_game(t_game *w)
 	//esc hook
 	//mouse hook
 	//enter hook
-	xpm = mlx_xpm_file_to_image (w->mlx_ptr, "./ressources/main.xpm", &width, &height);
-	mlx_put_image_to_window(w->mlx_ptr, w->win_ptr,	xpm, 0, 0);
-	xpm = mlx_xpm_file_to_image (w->mlx_ptr, "./ressources/level.xpm", &width, &height);
-	mlx_put_image_to_window(w->mlx_ptr, w->win_ptr, xpm, 90, 330);
-	xpm = mlx_xpm_file_to_image (w->mlx_ptr, "./ressources/level.xpm", &width, &height);
-	mlx_put_image_to_window(w->mlx_ptr, w->win_ptr, xpm, width + 90 + 10, 330);
-	xpm = mlx_xpm_file_to_image (w->mlx_ptr, "./ressources/level.xpm", &width, &height);
-	mlx_put_image_to_window(w->mlx_ptr, w->win_ptr, xpm, (width * 2) + 90 + 20, 330);
+	main_menu(w);
 	mlx_hook(w->win_ptr, 17, 1, exit_cleanup, w);
+	mlx_hook(w->win_ptr, 2, 1, key_press, w);
 }
 
 int			main(void)

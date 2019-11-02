@@ -44,9 +44,14 @@ typedef struct	s_game
 	void		*mlx_ptr;
 	void		*win_ptr;
 	void		*img_ptr;
+	int			*data;
+	int				endian;
+	int				s_l;
+	int				bpp;
 	char		**world;
 	double		position[2];
 	double		direction[2];
+	int 		level;
 	int			height;
 	char		flags;
 }				t_game;
@@ -56,6 +61,7 @@ typedef struct	s_game
 # define FIRST_TIME 2
 
 int				exit_cleanup(void *w);
+int				key_press(int key, t_game *w);
 char			**read_world(int fd);
 
 # define INITIAL_X 5.5
