@@ -172,9 +172,15 @@ void set_params(t_game *w)
 void gameplay_event(int key, t_game *w)
 {
 	if (key == 123)
+	{
 		rot_x(w->gameplay.direction, (double)ROT_ANGLE);
+		rot_x(w->gameplay.plane, (double)ROT_ANGLE);
+	}
 	if (key == 124)
+	{
 		rot_x(w->gameplay.direction, (double)ROT_ANGLE * -1);
+		rot_x(w->gameplay.plane, (double)ROT_ANGLE * -1);
+	}
 	if (key == 126)
 		translation(w, 0.5, key);
 	if (key == 125)
