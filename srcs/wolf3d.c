@@ -6,7 +6,7 @@
 /*   By: merras <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/01 19:19:29 by merras            #+#    #+#             */
-/*   Updated: 2019/11/03 23:38:52 by merras           ###   ########.fr       */
+/*   Updated: 2019/11/04 00:41:34 by merras           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,40 +120,24 @@ void	vec_normalise(double *v)
 	v[1] /= mod;
 }
 
-void translation(t_game *w, double factor, int key)
+void translation(t_game *w, double factor)
 {
 	double *tmp;
-	double tanslation[2];
 
 	tmp = w->gameplay.direction;
 	vec_normalise(tmp);
-	tanslation[0] = w->gameplay.position[0];
-	tanslation[1] = w->gameplay.position[1];
-	if (key == 126)
-	{
-			tanslation[0] += (factor * tmp[0]);
-			tanslation[1] += (factor * tmp[1]);
-	}
-	if (key == 125)
-	{
-
-			tanslation[0] -= (factor * tmp[0]);
-			tanslation[1] -= (factor * tmp[1]);
-	}
-	if (tanslation[0] >= 1 && tanslation[1] >= 1 && tanslation[0] <= 22 && tanslation[1] <= 22)
-	{
-		w->gameplay.position[0] = tanslation[0];
-		w->gameplay.position[1] = tanslation[1];
-	}
+	w->gameplay.position[0] += (factor * tmp[0]);
+	w->gameplay.position[1] += (factor * tmp[1]);
 }
+
 
 void	rot_x(double *ray, float angle)
 {
 	double	tmp;
 
 	tmp = ray[0];
-	ray[0] = ray[0] * cos(angle) - ray[1] * sin(angle);
-	ray[1] = tmp * sin(angle) + ray[1] * cos(angle);
+	ray[0] = ray[0] * cos(-angle) - ray[1] * sin(-angle);
+	ray[1] = tmp * sin(-angle) + ray[1] * cos(-angle);
 }
 
 void set_params(t_game *w)
@@ -171,14 +155,15 @@ void set_params(t_game *w)
 
 void gameplay_event(int key, t_game *w)
 {
-	if (key == 123)
-		rot_x(w->gameplay.direction, (double)ROT_ANGLE);
+	printf("angle %f\n", (double)ROT_ANGLE);
 	if (key == 124)
+		rot_x(w->gameplay.direction, (double)ROT_ANGLE);
+	if (key == 123)
 		rot_x(w->gameplay.direction, (double)ROT_ANGLE * -1);
 	if (key == 126)
-		translation(w, 0.5, key);
+		translation(w, 0.5);
 	if (key == 125)
-		translation(w, 0.5, key);
+		translation(w, -0.5);
 	render_scene(w);
 }
 

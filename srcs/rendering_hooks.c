@@ -6,7 +6,7 @@
 /*   By: merras <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/03 18:32:25 by merras            #+#    #+#             */
-/*   Updated: 2019/11/03 23:46:32 by merras           ###   ########.fr       */
+/*   Updated: 2019/11/04 00:31:16 by merras           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,6 @@ void	render_scene(t_game *w)
 		else
 			perpwalldist = (w->raycaster.map[Y] - w->gameplay.position[Y] +
 			(1 - w->raycaster.step[Y]) / 2) / w->raycaster.ray[Y];
-		// printf(">> %f\n", perpwalldist);
 		int lineheight = (int)(HEIGHT / perpwalldist);
 		int drawstart = -1 * lineheight / 2 + HEIGHT / 2;
 		if(drawstart < 0)drawstart = 0;

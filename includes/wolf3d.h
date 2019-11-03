@@ -6,7 +6,7 @@
 /*   By: merras <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/01 19:19:34 by merras            #+#    #+#             */
-/*   Updated: 2019/11/03 23:17:02 by merras           ###   ########.fr       */
+/*   Updated: 2019/11/04 00:38:02 by merras           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,10 +27,6 @@
 # define X 0
 # define Y 1
 
-
-# define BLOCK_WIDTH 20
-
-
 # define PI 3.14159265359
 # define DEG_TO_RAD(x) (x / 180 * PI)
 
@@ -39,13 +35,13 @@
 */
 
 # define FOV 90
-# define INITIAL_POSITION_X 22
-# define INITIAL_POSITION_Y 12
+# define INITIAL_POSITION_X 10
+# define INITIAL_POSITION_Y 10
 # define INITIAL_DIRECTION_X -1
 # define INITIAL_DIRECTION_Y 0
 # define INITIAL_PLANE_X 0
-# define INITIAL_PLANE_Y 0.66//tan(FOV / 2)
-# define ROT_ANGLE 0.2
+# define INITIAL_PLANE_Y tan(FOV / 2)
+# define ROT_ANGLE 0.01
 
 
 /*
