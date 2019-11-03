@@ -6,7 +6,7 @@
 /*   By: merras <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/03 18:32:25 by merras            #+#    #+#             */
-/*   Updated: 2019/11/03 20:32:42 by merras           ###   ########.fr       */
+/*   Updated: 2019/11/03 20:36:43 by merras           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,20 +14,20 @@
 
 void	init_gameplay(t_game *w)
 {
-	w->position[X] = INITIAL_POSITION_X;
-	w->position[Y] = INITIAL_POSITION_Y;
-	w->direction[X] = INITIAL_DIRECTION_X;
-	w->direction[Y] = INITIAL_DIRECTION_Y;
-	w->plane[X] = INITIAL_PLANE_X;
-	w->plane[Y] = INITIAL_PLANE_Y;
+	w->gameplay.position[X] = INITIAL_POSITION_X;
+	w->gameplay.position[Y] = INITIAL_POSITION_Y;
+	w->gameplay.direction[X] = INITIAL_DIRECTION_X;
+	w->gameplay.direction[Y] = INITIAL_DIRECTION_Y;
+	w->gameplay.plane[X] = INITIAL_PLANE_X;
+	w->gameplay.plane[Y] = INITIAL_PLANE_Y;
 }
 
 void	render_handler(t_game *w)
 {
 	if (!(w->gameplay.world = read_world(w->gameplay.fd)))
 		exit_cleanup(w);
-	// init_gameplay(w);
-	// render_scene(w);
+	init_gameplay(w);
+	render_scene(w);
 }
 
 void	render_scene(t_game *w)

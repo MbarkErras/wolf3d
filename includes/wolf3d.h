@@ -6,7 +6,7 @@
 /*   By: merras <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/01 19:19:34 by merras            #+#    #+#             */
-/*   Updated: 2019/11/03 20:33:12 by merras           ###   ########.fr       */
+/*   Updated: 2019/11/03 20:34:15 by merras           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,7 @@ typedef	struct	s_gameplay
 	char		**world;
 	double		position[2];
 	double		direction[2];
+	double		plane[2];
 	int			height;
 	int			fd;
 }				t_gameplay;
