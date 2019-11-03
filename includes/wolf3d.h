@@ -80,6 +80,7 @@ char			**read_world(int fd);
 # define INITIAL_Y 5.5
 
 void			load_gameplay(int fd, t_game *w);
+void			render_handler(t_game *w);
 
 # define F_GET(x, f) (x & (1 << f))
 # define F_BGET(x, f) (x & f)

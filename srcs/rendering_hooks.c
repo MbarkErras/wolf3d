@@ -14,12 +14,14 @@
 
 void	render_handler(t_game *w)
 {
-	if (!(w->world = read_world(w->fd)))
-		exit_cleanup(w);
-	render_scene(w)
+	printf("testoooo\n");
+	mlx_clear_window(w->mlx_ptr, w->win_ptr);
+	// if (!(w->world = read_world(w->fd)))
+	// 	exit_cleanup(w);
+	// render_scene(w);
 }
 
-void	render_scene(t_game *w)
+/*void	render_scene(t_game *w)
 {
-	mlx_clear_window(w->mlx_ptr, w->win_ptr)
-}
+	mlx_clear_window(w->mlx_ptr, w->win_ptr);
+}*/
