@@ -1,7 +1,6 @@
 NAME=wolf3d
 
 SRCS=wolf3d.c \
-	renderer.c \
 	renderer_utilities.c \
 	handlers.c \
 	rendering_hooks.c
