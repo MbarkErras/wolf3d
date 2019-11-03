@@ -6,7 +6,7 @@
 /*   By: merras <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/01 19:19:34 by merras            #+#    #+#             */
-/*   Updated: 2019/11/03 20:10:51 by merras           ###   ########.fr       */
+/*   Updated: 2019/11/03 20:27:23 by merras           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,15 +72,14 @@ typedef struct	s_config
 	void		*win_ptr;
 	void		*img_ptr;
 	int			*data;
-	int				endian;
-	int				s_l;
-	int				bpp;
+	int			endian;
+	int			s_l;
+	int			bpp;
 }				t_config;
 
 typedef struct	s_raycaster
 {
-	int			a;
-	
+
 }				t_raycaster;
 
 typedef struct	s_game
