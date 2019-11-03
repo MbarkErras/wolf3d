@@ -16,7 +16,6 @@ int			exit_cleanup(void *w)
 {
 	mlx_clear_window(((t_game *)w)->mlx_ptr, ((t_game *)w)->win_ptr);
 	//mlx_destroy_image(((t_game *)w)->mlx_ptr, ((t_game *)w)->img_ptr);
-	//mlx_destroy_image(((t_game *)w)->mlx_ptr, ((t_game *)w)->img_menu);
 	//cleanup;
 	exit(0);
 }
@@ -31,7 +30,6 @@ void 	menu_event(int key, t_game *w)
 			w->level = 0;
 		mlx_clear_window(w->mlx_ptr, w->win_ptr);
 		mlx_destroy_image(w->mlx_ptr, w->img_ptr);
-		mlx_destroy_image(w->mlx_ptr, w->img_menu);
 		main_menu(w);
 	}
 	if (key == 123)
@@ -42,7 +40,6 @@ void 	menu_event(int key, t_game *w)
 			w->level = 2;
 		mlx_clear_window(w->mlx_ptr, w->win_ptr);
 		mlx_destroy_image(w->mlx_ptr, w->img_ptr);
-		mlx_destroy_image(w->mlx_ptr, w->img_menu);
 		main_menu(w);
 	}
 }
@@ -65,8 +62,6 @@ void 	border(t_game *w)
 	int x;
 	int y;
 
-	w->img_menu = mlx_new_image(w->mlx_ptr, 102, 102);
-	w->data = (int *)mlx_get_data_addr(w->img_menu, &w->bpp, &w->s_l, &w->endian);
 	if (w->level == 0)
 		start = 89;
 	else if (w->level == 1)
@@ -79,11 +74,11 @@ void 	border(t_game *w)
 		x = 0;
 		while (x < 102)
 		{
-			w->data[y * 102 + x] = 0x00FF00;
+			if (((x == 0 && y != 0) || (y == 0 && x != 0)) && x < 80 && y < 80)
+				mlx_pixel_put(w->mlx_ptr, w->win_ptr, x + start, y + 329, 0xFFFFFF);
 			x++;
 		}
 	}
-	mlx_put_image_to_window(w->mlx_ptr, w->win_ptr, w->img_menu, start, 329);
 }
 
 void 		main_menu(t_game *w)
@@ -96,7 +91,7 @@ void 		main_menu(t_game *w)
 	xpm = mlx_xpm_file_to_image (w->mlx_ptr, "./ressources/main.xpm", &width, &height);
 	mlx_put_image_to_window(w->mlx_ptr, w->win_ptr,	xpm, 0, 0);
 	border(w);
-	xpm = mlx_xpm_file_to_image (w->mlx_ptr, "./ressources/level.xpm", &width, &height);
+	xpm = mlx_xpm_file_to_image (w->mlx_ptr, "./ressources/icon.xpm", &width, &height);
 	mlx_put_image_to_window(w->mlx_ptr, w->win_ptr, xpm, 90, 330);
 	xpm = mlx_xpm_file_to_image (w->mlx_ptr, "./ressources/level.xpm", &width, &height);
 	mlx_put_image_to_window(w->mlx_ptr, w->win_ptr, xpm, width + 90 + 10, 330);
@@ -127,7 +122,7 @@ int			main(void)
 
 	// DEV
 	int fd = open("worlds/world0.map", O_RDONLY);
-	load_gameplay(fd, &wolf3d);
+	//load_gameplay(fd, &wolf3d);
 	//
 	mlx_loop(wolf3d.mlx_ptr);
 }

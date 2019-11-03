@@ -47,7 +47,6 @@ typedef struct	s_game
 	void		*mlx_ptr;
 	void		*win_ptr;
 	void		*img_ptr;
-	void		*img_menu;
 	int			*data;
 	int				endian;
 	int				s_l;
