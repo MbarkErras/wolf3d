@@ -6,7 +6,7 @@
 /*   By: merras <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/01 19:19:34 by merras            #+#    #+#             */
-/*   Updated: 2019/11/03 20:34:15 by merras           ###   ########.fr       */
+/*   Updated: 2019/11/03 22:59:46 by merras           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,12 @@ typedef struct	s_config
 
 typedef struct	s_raycaster
 {
-
+	double		sidedist[2];
+	double		deltadist[2];
+	double		step[2];
+	double		ray[2];
+	int			map[2];
+	int			side;
 }				t_raycaster;
 
 typedef struct	s_game
