@@ -6,7 +6,7 @@
 /*   By: merras <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/01 19:19:34 by merras            #+#    #+#             */
-/*   Updated: 2019/11/03 20:27:23 by merras           ###   ########.fr       */
+/*   Updated: 2019/11/03 20:33:12 by merras           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,6 @@
 
 
 # define BLOCK_WIDTH 20
-# define FOV 90.0
 
 
 # define PI 3.14159265359
@@ -72,9 +71,10 @@ typedef struct	s_config
 	void		*win_ptr;
 	void		*img_ptr;
 	int			*data;
-	int			endian;
-	int			s_l;
-	int			bpp;
+	int 		level;
+	int				endian;
+	int				s_l;
+	int				bpp;
 }				t_config;
 
 typedef struct	s_raycaster
