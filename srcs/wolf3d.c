@@ -6,7 +6,7 @@
 /*   By: merras <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/01 19:19:29 by merras            #+#    #+#             */
-/*   Updated: 2019/11/02 16:39:50 by event            ###   ########.fr       */
+/*   Updated: 2019/11/03 04:03:52 by merras           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,8 @@
 int			exit_cleanup(void *w)
 {
 	mlx_clear_window(((t_game *)w)->mlx_ptr, ((t_game *)w)->win_ptr);
-	mlx_destroy_image(((t_game *)w)->mlx_ptr, ((t_game *)w)->img_ptr);
-	mlx_destroy_image(((t_game *)w)->mlx_ptr, ((t_game *)w)->img_menu);
+	//mlx_destroy_image(((t_game *)w)->mlx_ptr, ((t_game *)w)->img_ptr);
+	//mlx_destroy_image(((t_game *)w)->mlx_ptr, ((t_game *)w)->img_menu);
 	//cleanup;
 	exit(0);
 }
@@ -113,9 +113,9 @@ static void	init_game(t_game *w)
 	//esc hook
 	//mouse hook
 	//enter hook
-	main_menu(w);
+	//main_menu(w);
 	mlx_hook(w->win_ptr, 17, 1, exit_cleanup, w);
-	mlx_hook(w->win_ptr, 2, 1, key_press, w);
+	//mlx_hook(w->win_ptr, 2, 1, key_press, w);
 }
 
 int			main(void)

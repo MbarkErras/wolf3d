@@ -5,81 +5,89 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: merras <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/11/01 21:34:49 by merras            #+#    #+#             */
-/*   Updated: 2019/11/02 16:33:58 by event            ###   ########.fr       */
+/*   Created: 2019/11/03 01:40:46 by merras            #+#    #+#             */
+/*   Updated: 2019/11/03 04:03:47 by merras           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "wolf3d.h"
 
-void	vec_normalise(double *v)
+void	verticalline(int x, int start, int end, char c, t_game *w)
 {
-	double	x;
-	double	y;
-	double	mod;
+	while (++start < end)
+		mlx_pixel_put(w->mlx_ptr, w->win_ptr, x, start, c == '1' ? 0xff0000 : 0x00ff00);
+		
 
-	x = v[0] * v[0];
-	y = v[1] * v[1];
-	mod = sqrt(x + y);
-	v[0] /= mod;
-	v[1] /= mod;
-}
-
-void	rot_x(double *ray, float angle)
-{
-	double	tmp;
-
-	tmp = ray[0];
-	ray[0] = ray[0] * cos(angle) - ray[1] * sin(angle);
-	ray[1] = tmp * sin(angle) + ray[1] * cos(angle);
-}
-
-void	describe_line(double *p, double *ray, double *line)
-{
-	if (ray[0] < 0.000001)
-		ray[0] = 0.01;
-
-	line[0] = ray[1] / ray[0];
-	line[1] = p[1] - p[0] * line[0];
 }
 
 void	load_gameplay(int fd, t_game *w)
 {
-	double	ray[2];
-	double	line[2];
+	double position[2] = {22, 12};
+	double direction[2] = {-1, 0};
+	double plane[2] = {0, 0.66};
 
 	if (!(w->world = read_world(fd)))
 		exit_cleanup(w);
-	w->position[0] = 1 * BLOCK_WIDTH;
-	w->position[1] = 1 * BLOCK_WIDTH;
-	w->direction[0] = 1;
-	w->direction[1] = 1;
 
-	ray[0] = w->direction[0];
-	ray[1] = w->direction[1];
+	for (int x = 0; x < WIDTH; x++)
+	{
+		double cameraX = 2 * x / (double)WIDTH - 1;
+		double ray[2] = {direction[0] + cameraX * plane[0],
+			direction[1] + cameraX * plane[1]};
+		int	map[2] = {(int)position[0], (int)position[1]};
+		double sidedist[2];
+		double deltadist[2] = {fabs(1/ray[0]), fabs(1/ray[1])};
+		double perpwalldist;
+		double step[2];
+		int hit = 1;
+		int side;
+		if (ray[0] < 0)
+		{
+			step[0] = -1;
+			sidedist[0] = (position[0] - map[0])  * deltadist[0];
+		}
+		else
+		{
+			step[0] = 1;
+			sidedist[0] = (position[0] - map[0] + 1.0)  * deltadist[0];
+		}
+		if (ray[1] < 0)
+		{
+			step[1] = -1;
+			sidedist[1] = (position[1] - map[1])  * deltadist[1];
+		}
+		else
+		{
+			step[1] = 1;
+			sidedist[1] = (position[1] - map[1] + 1.0)  * deltadist[1];
+		}
+		while (hit)
+		{
+			if (sidedist[0] < sidedist[1])
+			{
+				sidedist[0] += deltadist[0];
+				map[0] += step[0];
+				side = 0;
+			}
+			else
+			{
+				sidedist[1] += deltadist[1];
+				map[1] += step[1];
+				side = 1;
+			}
+			if (w->world[map[0]][map[1]] > '0')
+				hit = 0;
+		}
+		if (side == 0) 
+			perpwalldist = (map[0] - position[0] + (1 - step[0]) / 2) / ray[0];
+		else
+			perpwalldist = (map[1] - position[1] + (1 - step[1]) / 2) / ray[1];
+		int lineheight = (int)(HEIGHT / perpwalldist);
+		int drawstart = -1 * lineheight / 2 + HEIGHT / 2;
+		if(drawstart < 0)drawstart = 0;
+		int drawend = lineheight / 2 + HEIGHT / 2;
+		if(drawend >= HEIGHT)drawend = HEIGHT - 1;
+		verticalline(x, drawstart, drawend, w->world[map[0]][map[1]], w);
+	}
 
-	vec_normalise(ray);
-	rot_x(ray, DEG_TO_RAD(FOV / 2));
-
-	double x;
-	double y;
-
-   	x = w->position[0] + (20 - ((int)w->position[0] % 20));
-	describe_line(w->position, ray, line);
-	printf("position: %f %f\n", w->position[0], w->position[1]);
-	printf("direction: %f %f\n", w->direction[0], w->direction[1]);
-	printf("ray: %f %f\n", ray[0], ray[1]);
-	printf("line: %f %f\n", line[0], line[1]);
-	printf("first block to check: %f\n", x);
-//	while (x < WIDTH)
-//	{
-//		y = line[0] * x + line[1] + 0.01;
-//		printf(">> %f %f\n", x, y);
-//		printf (">>>> x = %d  y = %d", (int)x / 20, (int)y / 20); 
-//		if (w->world[(int)y / 20][(int)x / 20] == '1')
-//			printf("lah\n");
-//		else
-//			printf("chitan\n");
-//		x += BLOCK_WIDTH;
-//	}
 }

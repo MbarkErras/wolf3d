@@ -6,7 +6,7 @@
 /*   By: merras <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/01 19:19:34 by merras            #+#    #+#             */
-/*   Updated: 2019/11/02 01:59:00 by merras           ###   ########.fr       */
+/*   Updated: 2019/11/03 04:03:43 by merras           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,9 @@
 # define EXEC_NAME "wolf3d"
 # define WIDTH 500
 # define HEIGHT 500
+# define MAPWIDTH 24
+# define MAPHEIGHT 24
+
 # define BLOCK_WIDTH 20
 # define FOV 90.0
 
