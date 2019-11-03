@@ -34,7 +34,7 @@ void	render_handler(t_game *w)
 void	render_scene(t_game *w)
 {
 	int	x;
-
+printf("direction : %f %f\n", w->gameplay.position[X], w->gameplay.position[Y]);
 	mlx_clear_window(w->config.mlx_ptr, w->config.win_ptr);
 	// x = -1;
 	// while (++x < WIDTH)

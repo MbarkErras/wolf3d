@@ -107,6 +107,38 @@ void 	menu_event(int key, t_game *w)
 	}
 }
 
+void	vec_normalise(double *v)
+{
+	double	x;
+	double	y;
+	double	mod;
+
+	x = v[0] * v[0];
+	y = v[1] * v[1];
+	mod = sqrt(x + y);
+	v[0] /= mod;
+	v[1] /= mod;
+}
+
+void translation(t_game *w, double factor)
+{
+	double *tmp;
+
+	tmp = w->gameplay.direction;
+	vec_normalise(tmp);
+	w->gameplay.position[0] += (factor * tmp[0]);
+	w->gameplay.position[1] += (factor * tmp[1]);
+}
+
+void	rot_x(double *ray, float angle)
+{
+	double	tmp;
+
+	tmp = ray[0];
+	ray[0] = ray[0] * cos(angle) - ray[1] * sin(angle);
+	ray[1] = tmp * sin(angle) + ray[1] * cos(angle);
+}
+
 void set_params(t_game *w)
 {
 	int fd;
@@ -120,12 +152,28 @@ void set_params(t_game *w)
 	render_handler(w);
 }
 
+void gameplay_event(int key, t_game *w)
+{
+	if (key == 124)
+		rot_x(w->gameplay.direction, (double)ROT_ANGLE);
+	if (key == 123)
+		rot_x(w->gameplay.direction, (double)ROT_ANGLE * -1);
+	if (key == 126)
+		translation(w, 0.5);
+	if (key == 125)
+		translation(w, -0.5);
+	render_scene(w);
+}
+
 int		key_press(int key, t_game *w)
 {
-	if (key == 124 || key == 123)
+	printf("key : %d\n", key);
+	if (key == 124 || key == 123 || key == 125 || key == 126)
 	{
 		if (!F_GET(w->flags, GAMEPLAY))
 			menu_event(key, w);
+		else
+			gameplay_event(key, w);
 	}
 	if (key == 53)
 	{
