@@ -6,7 +6,7 @@
 /*   By: merras <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/01 19:19:29 by merras            #+#    #+#             */
-/*   Updated: 2019/11/03 20:10:07 by merras           ###   ########.fr       */
+/*   Updated: 2019/11/03 23:38:52 by merras           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -145,9 +145,9 @@ void set_params(t_game *w)
 	if (w->config.level == 0)
 		fd = open("worlds/world0.map", O_RDONLY);
 	if (w->config.level == 1)
-		fd = open("worlds/world1.map", O_RDONLY);
+		fd = open("worlds/world0.map", O_RDONLY);
 	if (w->config.level == 2)
-		fd = open("worlds/world1.map", O_RDONLY);
+		fd = open("worlds/world0.map", O_RDONLY);
 	w->gameplay.fd = fd;
 	render_handler(w);
 }
@@ -267,7 +267,7 @@ int			main(void)
 	//load_home(&wolf3d);
 
 	// DEV
-	int fd = open("worlds/world0.map", O_RDONLY);
+	//int fd = open("worlds/world0.map", O_RDONLY);
 	//load_gameplay(fd, &wolf3d);
 	//
 	mlx_loop(wolf3d.config.mlx_ptr);
