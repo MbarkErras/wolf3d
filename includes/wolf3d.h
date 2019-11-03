@@ -29,7 +29,6 @@
 
 
 # define BLOCK_WIDTH 20
-# define FOV 90.0
 
 
 # define PI 3.14159265359
@@ -63,6 +62,7 @@ typedef struct	s_game
 	void		*win_ptr;
 	void		*img_ptr;
 	int			*data;
+	int 		level;
 	int				endian;
 	int				s_l;
 	int				bpp;

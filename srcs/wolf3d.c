@@ -25,6 +25,23 @@ int			exit_cleanup(void *w)
 	exit(0);
 }
 
+int		mouse_move(int x, int y, t_game *w)
+{
+	int		width;
+	int		height;
+	void	*xpm;
+
+	// printf("%d %d\n", x, y);
+	if (x <= WIDTH && x >=0 &&  y <= HEIGHT && y >=0)
+	{
+		mini_clear(w);
+		main_menu(w);
+		xpm = mlx_xpm_file_to_image (w->mlx_ptr, "./ressources/curs.xpm", &width, &height);
+		mlx_put_image_to_window(w->mlx_ptr, w->win_ptr, xpm, x, y);
+	}
+	return (0);
+}
+
 void 	menu_event(int key, t_game *w)
 {
 	if (key == 124)
@@ -143,6 +160,7 @@ static void	init_game(t_game *w)
 	main_menu(w);
 	mlx_hook(w->win_ptr, 17, 1, exit_cleanup, w);
 	mlx_hook(w->win_ptr, 2, 1, key_press, w);
+	mlx_hook(w->win_ptr, 6, 1, mouse_move, w);
 }
 
 int			main(void)
