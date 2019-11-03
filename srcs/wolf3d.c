@@ -120,14 +120,31 @@ void	vec_normalise(double *v)
 	v[1] /= mod;
 }
 
-void translation(t_game *w, double factor)
+void translation(t_game *w, double factor, int key)
 {
 	double *tmp;
+	double tanslation[2];
 
 	tmp = w->gameplay.direction;
 	vec_normalise(tmp);
-	w->gameplay.position[0] += (factor * tmp[0]);
-	w->gameplay.position[1] += (factor * tmp[1]);
+	tanslation[0] = w->gameplay.position[0];
+	tanslation[1] = w->gameplay.position[1];
+	if (key == 126)
+	{
+			tanslation[0] += (factor * tmp[0]);
+			tanslation[1] += (factor * tmp[1]);
+	}
+	if (key == 125)
+	{
+
+			tanslation[0] -= (factor * tmp[0]);
+			tanslation[1] -= (factor * tmp[1]);
+	}
+	if (tanslation[0] >= 1 && tanslation[1] >= 1 && tanslation[0] <= 22 && tanslation[1] <= 22)
+	{
+		w->gameplay.position[0] = tanslation[0];
+		w->gameplay.position[1] = tanslation[1];
+	}
 }
 
 void	rot_x(double *ray, float angle)
@@ -154,14 +171,14 @@ void set_params(t_game *w)
 
 void gameplay_event(int key, t_game *w)
 {
-	if (key == 124)
-		rot_x(w->gameplay.direction, (double)ROT_ANGLE);
 	if (key == 123)
+		rot_x(w->gameplay.direction, (double)ROT_ANGLE);
+	if (key == 124)
 		rot_x(w->gameplay.direction, (double)ROT_ANGLE * -1);
 	if (key == 126)
-		translation(w, 0.5);
+		translation(w, 0.5, key);
 	if (key == 125)
-		translation(w, -0.5);
+		translation(w, 0.5, key);
 	render_scene(w);
 }
 
