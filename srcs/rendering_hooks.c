@@ -24,6 +24,7 @@ void	init_gameplay(t_game *w)
 
 void	render_handler(t_game *w)
 {
+
 	if (!(w->gameplay.world = read_world(w->gameplay.fd)))
 		exit_cleanup(w);
 	init_gameplay(w);

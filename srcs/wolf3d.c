@@ -20,10 +20,40 @@ void mini_clear(t_game *w)
 
 int			exit_cleanup(void *w)
 {
-	mlx_clear_window(((t_game *)w)->config.mlx_ptr, ((t_game *)w)->config.win_ptr);
+	mini_clear((t_game *)w);
+	// mlx_clear_window(((t_game *)w)->config.mlx_ptr, ((t_game *)w)->config.win_ptr);
 	//mlx_destroy_image(((t_game *)w)->mlx_ptr, ((t_game *)w)->img_ptr);
 	//cleanup;
 	exit(0);
+}
+
+int		mouse_press(int mouse, int x, int y, t_game *w)
+{
+	if (mouse == 1)
+	{
+		if (y >= 330 && y <= 430)
+		{
+			if (x >= 90 && x <= 190)
+			{
+				w->config.level = 0;
+				F_SET(w->flags, GAMEPLAY);
+				set_params(w);
+			}
+			if (x >= 200 && x <= 300)
+			{
+				w->config.level = 1;
+				F_SET(w->flags, GAMEPLAY);
+				set_params(w);
+			}
+			if (x >= 310 && x <= 410)
+			{
+				w->config.level = 2;
+				F_SET(w->flags, GAMEPLAY);
+				set_params(w);
+			}
+		}
+	}
+	return (0);
 }
 
 int		mouse_move(int x, int y, t_game *w)
@@ -31,14 +61,26 @@ int		mouse_move(int x, int y, t_game *w)
 	int		width;
 	int		height;
 	void	*xpm;
-
-	// printf("%d %d\n", x, y);
-	if (x <= WIDTH && x >=0 &&  y <= HEIGHT && y >=0)
+	if (!F_GET(w->flags, GAMEPLAY))
 	{
-		mini_clear(w);
-		main_menu(w);
-		xpm = mlx_xpm_file_to_image (w->config.mlx_ptr, "./ressources/curs.xpm", &width, &height);
-		mlx_put_image_to_window(w->config.mlx_ptr, w->config.win_ptr, xpm, x, y);
+		if (x <= WIDTH && x >=0 &&  y <= HEIGHT && y >=0)
+		{
+			if (y >= 330 && y <= 430)
+			{
+				if (x >= 90 && x <= 190)
+					w->config.level = 0;
+				if (x >= 200 && x <= 300)
+					w->config.level = 1;
+				if (x >= 310 && x <= 410)
+					w->config.level = 2;
+			}
+			w->config.mx = x;
+			w->config.my = y;
+			mini_clear(w);
+			main_menu(w);
+			xpm = mlx_xpm_file_to_image (w->config.mlx_ptr, "./ressources/curs.xpm", &width, &height);
+			mlx_put_image_to_window(w->config.mlx_ptr, w->config.win_ptr, xpm, x, y);
+		}
 	}
 	return (0);
 }
@@ -65,15 +107,43 @@ void 	menu_event(int key, t_game *w)
 	}
 }
 
+void set_params(t_game *w)
+{
+	int fd;
+	if (w->config.level == 0)
+		fd = open("worlds/world0.map", O_RDONLY);
+	if (w->config.level == 1)
+		fd = open("worlds/world1.map", O_RDONLY);
+	if (w->config.level == 2)
+		fd = open("worlds/world1.map", O_RDONLY);
+	w->gameplay.fd = fd;
+	render_handler(w);
+}
+
 int		key_press(int key, t_game *w)
 {
 	if (key == 124 || key == 123)
 	{
-		if (!F_GET(1, GAMEPLAY))
+		if (!F_GET(w->flags, GAMEPLAY))
 			menu_event(key, w);
 	}
 	if (key == 53)
-		exit_cleanup(w);
+	{
+		if (!F_GET(w->flags, GAMEPLAY))
+			exit_cleanup(w);
+		else
+		{
+			mini_clear(w);
+			F_UNSET(w->flags, GAMEPLAY);
+			main_menu(w);
+		}
+	}
+	if (key == 36)
+		if (!F_GET(w->flags, GAMEPLAY))
+		{
+			F_SET(w->flags, GAMEPLAY);
+			set_params(w);
+		}
 	return (0);
 }
 
@@ -118,11 +188,16 @@ void 		main_menu(t_game *w)
 	mlx_put_image_to_window(w->config.mlx_ptr, w->config.win_ptr, xpm, width + 90 + 10, 330);
 	xpm = mlx_xpm_file_to_image (w->config.mlx_ptr, "./ressources/l3.xpm", &width, &height);
 	mlx_put_image_to_window(w->config.mlx_ptr, w->config.win_ptr, xpm, (width * 2) + 90 + 20, 330);
+	xpm = mlx_xpm_file_to_image (w->config.mlx_ptr, "./ressources/curs.xpm", &width, &height);
+	mlx_put_image_to_window(w->config.mlx_ptr, w->config.win_ptr, xpm, w->config.mx, w->config.my);
 }
 
 static void	init_game(t_game *w)
 {
 	w->config.level = 0;
+	w->config.mx = 0;
+	w->config.my = 0;
+	F_UNSET(w->flags, GAMEPLAY);
 	w->config.mlx_ptr = mlx_init();
 	w->config.win_ptr = mlx_new_window(w->config.mlx_ptr, WIDTH, HEIGHT, EXEC_NAME);
 	//arrow hooks
@@ -131,6 +206,7 @@ static void	init_game(t_game *w)
 	//enter hook
 	main_menu(w);
 	mlx_hook(w->config.win_ptr, 17, 1, exit_cleanup, w);
+	mlx_hook(w->config.win_ptr, 4, 1, mouse_press, w);
 	mlx_hook(w->config.win_ptr, 2, 1, key_press, w);
 	mlx_hook(w->config.win_ptr, 6, 1, mouse_move, w);
 }
