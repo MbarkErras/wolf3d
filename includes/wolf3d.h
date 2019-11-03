@@ -6,7 +6,7 @@
 /*   By: merras <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/01 19:19:34 by merras            #+#    #+#             */
-/*   Updated: 2019/11/03 22:59:46 by merras           ###   ########.fr       */
+/*   Updated: 2019/11/03 23:06:32 by merras           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,10 +41,11 @@
 # define FOV 90
 # define INITIAL_POSITION_X 0
 # define INITIAL_POSITION_Y 0
-# define INITIAL_DIRECTION_X 0
-# define INITIAL_DIRECTION_Y 0
+# define INITIAL_DIRECTION_X 1
+# define INITIAL_DIRECTION_Y 1
 # define INITIAL_PLANE_X 0
 # define INITIAL_PLANE_Y tan(FOV / 2)
+# define ROT_ANGLE 0.2
 
 
 /*
@@ -72,6 +73,8 @@ typedef struct	s_config
 	void		*win_ptr;
 	void		*img_ptr;
 	int			*data;
+	int 		mx;
+	int 		my;
 	int 		level;
 	int				endian;
 	int				s_l;
@@ -93,6 +96,7 @@ typedef struct	s_game
 	t_config		config;
 	t_gameplay		gameplay;
 	t_raycaster		raycaster;
+	char					flags;
 }				t_game;
 
 # define GAMEPLAY 1
@@ -101,9 +105,11 @@ typedef struct	s_game
 int				exit_cleanup(void *w);
 int				key_press(int key, t_game *w);
 void 			main_menu(t_game *w);
+void 			set_params(t_game *w);
 char			**read_world(int fd);
 
 void			render_handler(t_game *w);
+void			render_scene(t_game *w);
 
 # define F_GET(x, f) (x & (1 << f))
 # define F_BGET(x, f) (x & f)
