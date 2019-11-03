@@ -6,7 +6,7 @@
 /*   By: merras <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/01 19:19:34 by merras            #+#    #+#             */
-/*   Updated: 2019/11/03 19:17:07 by merras           ###   ########.fr       */
+/*   Updated: 2019/11/03 20:10:51 by merras           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,16 @@
 # define WATER 'w'
 # define LAVA 'l'
 
-typedef struct	s_game
+typedef	struct	s_gameplay
+{
+	char		**world;
+	double		position[2];
+	double		direction[2];
+	int			height;
+	int			fd;
+}				t_gameplay;
+
+typedef struct	s_config
 {
 	void		*mlx_ptr;
 	void		*win_ptr;
@@ -66,19 +75,19 @@ typedef struct	s_game
 	int				endian;
 	int				s_l;
 	int				bpp;
+}				t_config;
 
+typedef struct	s_raycaster
+{
+	int			a;
+	
+}				t_raycaster;
 
-
-
-	char		**world;
-	double		position[2];
-	double		direction[2];
-	int			height;
-	char		flags;
-	int			fd;
-
-
-
+typedef struct	s_game
+{
+	t_config		config;
+	t_gameplay		gameplay;
+	t_raycaster		raycaster;
 }				t_game;
 
 # define GAMEPLAY 1
