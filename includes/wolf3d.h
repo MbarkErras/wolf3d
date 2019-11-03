@@ -6,7 +6,7 @@
 /*   By: merras <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/01 19:19:34 by merras            #+#    #+#             */
-/*   Updated: 2019/11/03 19:15:36 by merras           ###   ########.fr       */
+/*   Updated: 2019/11/03 19:17:07 by merras           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,6 +88,8 @@ int				exit_cleanup(void *w);
 int				key_press(int key, t_game *w);
 void 			main_menu(t_game *w);
 char			**read_world(int fd);
+
+void			render_handler(t_game *w);
 
 # define F_GET(x, f) (x & (1 << f))
 # define F_BGET(x, f) (x & f)

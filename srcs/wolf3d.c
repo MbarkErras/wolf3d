@@ -12,10 +12,15 @@
 
 #include "wolf3d.h"
 
+void 		mini_clear(t_game *w)
+{
+	mlx_clear_window(w->mlx_ptr, w->win_ptr);
+	mlx_destroy_image(w->mlx_ptr, w->img_ptr);
+}
+
 int			exit_cleanup(void *w)
 {
-	mlx_clear_window(((t_game *)w)->mlx_ptr, ((t_game *)w)->win_ptr);
-	//mlx_destroy_image(((t_game *)w)->mlx_ptr, ((t_game *)w)->img_ptr);
+	mini_clear((t_game *)w);
 	//cleanup;
 	exit(0);
 }
@@ -28,8 +33,7 @@ void 	menu_event(int key, t_game *w)
 			w->level++;
 		else
 			w->level = 0;
-		mlx_clear_window(w->mlx_ptr, w->win_ptr);
-		mlx_destroy_image(w->mlx_ptr, w->img_ptr);
+		mini_clear(w);
 		main_menu(w);
 	}
 	if (key == 123)
@@ -38,21 +42,48 @@ void 	menu_event(int key, t_game *w)
 			w->level--;
 		else
 			w->level = 2;
-		mlx_clear_window(w->mlx_ptr, w->win_ptr);
-		mlx_destroy_image(w->mlx_ptr, w->img_ptr);
+		mini_clear(w);
 		main_menu(w);
 	}
+}
+
+void set_params(t_game *w)
+{
+	int fd;
+	if (w->level == 0)
+		fd = open("worlds/world0.map", O_RDONLY);
+	if (w->level == 0)
+		fd = open("worlds/world1.map", O_RDONLY);
+	if (w->level == 0)
+		fd = open("worlds/world2.map", O_RDONLY);
+	w->fd = fd;
+	render_handler(w);
 }
 
 int		key_press(int key, t_game *w)
 {
 	if (key == 124 || key == 123)
 	{
-		if (!F_GET(1, GAMEPLAY))
+		if (!F_GET(w->flags, GAMEPLAY))
 			menu_event(key, w);
 	}
 	if (key == 53)
-		exit_cleanup(w);
+	{
+		if (!F_GET(w->flags, GAMEPLAY))
+			exit_cleanup(w);
+		else
+		{
+			mini_clear(w);
+			F_UNSET(w->flags, GAMEPLAY);
+			main_menu(w);
+		}
+	}
+	if (key == 36)
+		if (!F_GET(w->flags, GAMEPLAY))
+		{
+			F_SET(w->flags, GAMEPLAY);
+			set_params(w);
+		}
 	return (0);
 }
 
@@ -101,6 +132,7 @@ void 		main_menu(t_game *w)
 
 static void	init_game(t_game *w)
 {
+	F_UNSET(w->flags, GAMEPLAY);
 	w->level = 0;
 	w->mlx_ptr = mlx_init();
 	w->win_ptr = mlx_new_window(w->mlx_ptr, WIDTH, HEIGHT, EXEC_NAME);
