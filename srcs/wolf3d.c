@@ -6,7 +6,7 @@
 /*   By: merras <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/01 19:19:29 by merras            #+#    #+#             */
-/*   Updated: 2019/11/04 00:41:34 by merras           ###   ########.fr       */
+/*   Updated: 2019/11/04 00:48:21 by merras           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -155,11 +155,16 @@ void set_params(t_game *w)
 
 void gameplay_event(int key, t_game *w)
 {
-	printf("angle %f\n", (double)ROT_ANGLE);
-	if (key == 124)
-		rot_x(w->gameplay.direction, (double)ROT_ANGLE);
 	if (key == 123)
+	{
+		rot_x(w->gameplay.direction, (double)ROT_ANGLE);
+		rot_x(w->gameplay.plane, (double)ROT_ANGLE);
+	}
+	if (key == 124)
+	{
 		rot_x(w->gameplay.direction, (double)ROT_ANGLE * -1);
+		rot_x(w->gameplay.plane, (double)ROT_ANGLE * -1);
+	}
 	if (key == 126)
 		translation(w, 0.5);
 	if (key == 125)

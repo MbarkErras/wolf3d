@@ -6,7 +6,7 @@
 /*   By: merras <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/01 19:19:34 by merras            #+#    #+#             */
-/*   Updated: 2019/11/04 00:38:02 by merras           ###   ########.fr       */
+/*   Updated: 2019/11/04 00:49:05 by merras           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@
 # define INITIAL_DIRECTION_Y 0
 # define INITIAL_PLANE_X 0
 # define INITIAL_PLANE_Y tan(FOV / 2)
-# define ROT_ANGLE 0.01
+# define ROT_ANGLE 0.2
 
 
 /*
