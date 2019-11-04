@@ -22,8 +22,8 @@
 # include "mlx.h"
 
 # define EXEC_NAME "wolf3d"
-# define WIDTH 500
-# define HEIGHT 500
+# define WIDTH 1000
+# define HEIGHT 1000
 # define X 0
 # define Y 1
 
@@ -38,9 +38,9 @@
 ** GAMEPLAY MACROS
 */
 
-# define FOV 90
-# define INITIAL_POSITION_X 22
-# define INITIAL_POSITION_Y 12
+# define FOV 66
+# define INITIAL_POSITION_X 3
+# define INITIAL_POSITION_Y 5
 # define INITIAL_DIRECTION_X -1
 # define INITIAL_DIRECTION_Y 0
 # define INITIAL_PLANE_X 0

@@ -31,21 +31,21 @@ int		mouse_press(int mouse, int x, int y, t_game *w)
 {
 	if (mouse == 1)
 	{
-		if (y >= 330 && y <= 430)
+		if (y >= 800 && y <= 900)
 		{
-			if (x >= 90 && x <= 190)
+			if (x >= 330 && x <= 430)
 			{
 				w->config.level = 0;
 				F_SET(w->flags, GAMEPLAY);
 				set_params(w);
 			}
-			if (x >= 200 && x <= 300)
+			if (x >= 440 && x <= 540)
 			{
 				w->config.level = 1;
 				F_SET(w->flags, GAMEPLAY);
 				set_params(w);
 			}
-			if (x >= 310 && x <= 410)
+			if (x >= 550 && x <= 650)
 			{
 				w->config.level = 2;
 				F_SET(w->flags, GAMEPLAY);
@@ -65,13 +65,13 @@ int		mouse_move(int x, int y, t_game *w)
 	{
 		if (x <= WIDTH && x >=0 &&  y <= HEIGHT && y >=0)
 		{
-			if (y >= 330 && y <= 430)
+			if (y >= 800 && y <= 900)
 			{
-				if (x >= 90 && x <= 190)
+				if (x >= 330 && x <= 430)
 					w->config.level = 0;
-				if (x >= 200 && x <= 300)
+				if (x >= 440 && x <= 540)
 					w->config.level = 1;
-				if (x >= 310 && x <= 410)
+				if (x >= 550 && x <= 650)
 					w->config.level = 2;
 			}
 			w->config.mx = x;
@@ -225,11 +225,11 @@ void 	border(t_game *w)
 	int y;
 
 	if (w->config.level == 0)
-		start = 89;
+		start = 329;
 	else if (w->config.level == 1)
-		start = 89 + 100 + 10;
+		start = 329 + 100 + 10;
 	else if (w->config.level == 2)
-		start = 89 + (100 + 10) * 2;
+		start = 329 + (100 + 10) * 2;
 	y = -1;
 	while (++y < 102)
 	{
@@ -237,7 +237,7 @@ void 	border(t_game *w)
 		while (x < 102)
 		{
 			if (((x == 0 && y != 0) || (y == 0 && x != 0)) && x < 80 && y < 80)
-				mlx_pixel_put(w->config.mlx_ptr, w->config.win_ptr, x + start, y + 329, 0xFFFFFF);
+				mlx_pixel_put(w->config.mlx_ptr, w->config.win_ptr, x + start, y + 799, 0xFFFFFF);
 			x++;
 		}
 	}
@@ -250,15 +250,15 @@ void 		main_menu(t_game *w)
 	void	*xpm;
 
 	w->config.img_ptr = mlx_new_image(w->config.mlx_ptr, WIDTH, HEIGHT);
-	xpm = mlx_xpm_file_to_image (w->config.mlx_ptr, "./ressources/main.xpm", &width, &height);
+	xpm = mlx_xpm_file_to_image (w->config.mlx_ptr, "./ressources/background.xpm", &width, &height);
 	mlx_put_image_to_window(w->config.mlx_ptr, w->config.win_ptr,	xpm, 0, 0);
 	border(w);
 	xpm = mlx_xpm_file_to_image (w->config.mlx_ptr, "./ressources/l1.xpm", &width, &height);
-	mlx_put_image_to_window(w->config.mlx_ptr, w->config.win_ptr, xpm, 90, 330);
+	mlx_put_image_to_window(w->config.mlx_ptr, w->config.win_ptr, xpm, 330, 800);
 	xpm = mlx_xpm_file_to_image (w->config.mlx_ptr, "./ressources/l2.xpm", &width, &height);
-	mlx_put_image_to_window(w->config.mlx_ptr, w->config.win_ptr, xpm, width + 90 + 10, 330);
+	mlx_put_image_to_window(w->config.mlx_ptr, w->config.win_ptr, xpm, width + 330 + 10, 800);
 	xpm = mlx_xpm_file_to_image (w->config.mlx_ptr, "./ressources/l3.xpm", &width, &height);
-	mlx_put_image_to_window(w->config.mlx_ptr, w->config.win_ptr, xpm, (width * 2) + 90 + 20, 330);
+	mlx_put_image_to_window(w->config.mlx_ptr, w->config.win_ptr, xpm, (width * 2) + 330 + 20, 800);
 	xpm = mlx_xpm_file_to_image (w->config.mlx_ptr, "./ressources/curs.xpm", &width, &height);
 	mlx_put_image_to_window(w->config.mlx_ptr, w->config.win_ptr, xpm, w->config.mx, w->config.my);
 }

@@ -74,12 +74,25 @@ void	verticalline(int x, int start, int end, char c, t_game *w)
 	}
 }
 
+void get_texture(t_game *w)
+{
+	int		width;
+	int		height;
+	void	*xpm;
+
+	mlx_clear_window(w->config.mlx_ptr, w->config.win_ptr);
+	w->config.img_ptr = mlx_new_image(w->config.mlx_ptr, WIDTH, HEIGHT);
+	xpm = mlx_xpm_file_to_image (w->config.mlx_ptr, "./ressources/sky.xpm", &width, &height);
+	mlx_put_image_to_window(w->config.mlx_ptr, w->config.win_ptr,	xpm, 0, 0);
+	xpm = mlx_xpm_file_to_image (w->config.mlx_ptr, "./ressources/floor.xpm", &width, &height);
+	mlx_put_image_to_window(w->config.mlx_ptr, w->config.win_ptr,	xpm, 0, 500);
+}
 void	render_scene(t_game *w)
 {
 	int	x;
 	double	perpwalldist;
 
-	mlx_clear_window(w->config.mlx_ptr, w->config.win_ptr);
+	get_texture(w);
 	x = -1;
 	while (++x < WIDTH)
 	{
