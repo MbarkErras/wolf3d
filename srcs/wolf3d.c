@@ -173,8 +173,8 @@ void gameplay_event(int key, t_game *w)
 {
 	if (key == 123)
 	{
-		rot_x(w->gameplay.direction, (double)ROT_ANGLE);
-		rot_x(w->gameplay.plane, (double)ROT_ANGLE);
+		rot_x(w->gameplay.direction, ROT_ANGLE);
+		rot_x(w->gameplay.plane, ROT_ANGLE);
 	}
 	if (key == 124)
 	{
@@ -182,15 +182,15 @@ void gameplay_event(int key, t_game *w)
 		rot_x(w->gameplay.plane, (double)ROT_ANGLE * -1);
 	}
 	if (key == 126)
-		translation(w, 0.5, key);
+		translation(w, 0.2, key);
 	if (key == 125)
-		translation(w, 0.5, key);
+		translation(w, 0.2, key);
 	render_scene(w);
 }
 
 int		key_press(int key, t_game *w)
 {
-	printf("key : %d\n", key);
+	// printf("key : %d\n", key);
 	if (key == 124 || key == 123 || key == 125 || key == 126)
 	{
 		if (!F_GET(w->flags, GAMEPLAY))

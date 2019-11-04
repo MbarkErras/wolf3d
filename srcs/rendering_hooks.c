@@ -108,9 +108,11 @@ void	render_scene(t_game *w)
 		// printf(">> %f\n", perpwalldist);
 		int lineheight = (int)(HEIGHT / perpwalldist);
 		int drawstart = -1 * lineheight / 2 + HEIGHT / 2;
-		if(drawstart < 0)drawstart = 0;
+		if(drawstart < 0)
+			drawstart = 0;
 		int drawend = lineheight / 2 + HEIGHT / 2;
-		if(drawend >= HEIGHT)drawend = HEIGHT - 1;
+		if(drawend >= HEIGHT)
+			drawend = HEIGHT - 1;
 		verticalline(x, drawstart, drawend, w->gameplay.world[w->raycaster.map[0]][w->raycaster.map[1]], w);
 	}
 }

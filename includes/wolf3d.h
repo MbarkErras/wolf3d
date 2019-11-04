@@ -45,7 +45,7 @@
 # define INITIAL_DIRECTION_Y 0
 # define INITIAL_PLANE_X 0
 # define INITIAL_PLANE_Y 0.66//tan(FOV / 2)
-# define ROT_ANGLE 0.2
+# define ROT_ANGLE 0.1
 
 
 /*
