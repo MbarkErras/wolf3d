@@ -38,7 +38,7 @@
 ** GAMEPLAY MACROS
 */
 
-# define FOV 66
+# define FOV 90
 # define INITIAL_POSITION_X 3
 # define INITIAL_POSITION_Y 5
 # define INITIAL_DIRECTION_X -1
