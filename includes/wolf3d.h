@@ -6,7 +6,7 @@
 /*   By: merras <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/01 19:19:34 by merras            #+#    #+#             */
-/*   Updated: 2019/11/04 00:49:05 by merras           ###   ########.fr       */
+/*   Updated: 2019/11/06 00:41:32 by merras           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,8 @@
 # include "mlx.h"
 
 # define EXEC_NAME "wolf3d"
-# define WIDTH 500
-# define HEIGHT 500
+# define WIDTH 1000
+# define HEIGHT 1000
 # define X 0
 # define Y 1
 
@@ -35,14 +35,13 @@
 */
 
 # define FOV 90
-# define INITIAL_POSITION_X 10
-# define INITIAL_POSITION_Y 10
+# define INITIAL_POSITION_X 3
+# define INITIAL_POSITION_Y 5
 # define INITIAL_DIRECTION_X -1
 # define INITIAL_DIRECTION_Y 0
 # define INITIAL_PLANE_X 0
 # define INITIAL_PLANE_Y tan(FOV / 2)
-# define ROT_ANGLE 0.2
-
+# define ROT_ANGLE 0.1
 
 /*
 ** TEXTURES MACROS
