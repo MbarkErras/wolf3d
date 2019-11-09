@@ -95,10 +95,19 @@ void	verticalline(int x, int start, int end, char c, t_game *w)
 	while (++start < end)
 	{
 		i = 1000 * start + x;
-		if (w->raycaster.side == X)
-			w->config.data[i] = c == '1' ? 0xff0000 : (c == '2' ? 0x00ff00 : (0x0000ff));
-		else if (w->raycaster.side == Y)
-			w->config.data[i] = c == '1' ? 0x990202 : (c == '2' ? 0x016e01 : (0x02026e));
+		if (c == '1')
+			w->config.data[i] = w->raycaster.side == X ? 0xff0000 : 0x990202;
+		else if (c == '2')
+			w->config.data[i] = w->raycaster.side == X ? 0x00ff00 : 0x016e01;
+		else
+			w->config.data[i] = w->raycaster.side == X ? 0x0000ff : 0x02026e;
+	}
+	while (end <= HEIGHT)
+	{
+		i = 1000 * end + x;
+		w->config.data[i] = 0x444540;
+		end++;
+
 	}
 }
 

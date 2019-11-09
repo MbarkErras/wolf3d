@@ -41,7 +41,7 @@
 # define INITIAL_DIRECTION_Y 0
 # define INITIAL_PLANE_X 0
 # define INITIAL_PLANE_Y tan(FOV / 2)
-# define ROT_ANGLE 0.1
+# define ROT_ANGLE 0.08
 
 /*
 ** TEXTURES MACROS
