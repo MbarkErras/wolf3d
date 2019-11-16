@@ -87,6 +87,8 @@ void	raycaster_loop(char **world, t_raycaster *r)
 			nothit = 0;
 	}
 }
+// <a class="navbar-brand logo-text" style="color:white" href="<?php echo esc_url( home_url( '/' ) ); ?>"><h2 class="logo-text"><?php echo esc_attr($shopcare_data['shopcare_text_logo']); ?></h2></a>
+
 
 void	verticalline(int x, int start, int end, char c, t_game *w)
 {
@@ -111,19 +113,6 @@ void	verticalline(int x, int start, int end, char c, t_game *w)
 	}
 }
 
-void get_texture(t_game *w)
-{
-	int		width;
-	int		height;
-	void	*xpm;
-
-	mlx_clear_window(w->config.mlx_ptr, w->config.win_ptr);
-	w->config.img_ptr = mlx_new_image(w->config.mlx_ptr, WIDTH, HEIGHT);
-	xpm = mlx_xpm_file_to_image (w->config.mlx_ptr, "./ressources/sky.xpm", &width, &height);
-	mlx_put_image_to_window(w->config.mlx_ptr, w->config.win_ptr,	xpm, 0, 0);
-	xpm = mlx_xpm_file_to_image (w->config.mlx_ptr, "./ressources/floor.xpm", &width, &height);
-	mlx_put_image_to_window(w->config.mlx_ptr, w->config.win_ptr,	xpm, 0, 500);
-}
 void	render_scene(t_game *w)
 {
 	int	x;
@@ -133,7 +122,9 @@ void	render_scene(t_game *w)
 	mlx_destroy_image(w->config.mlx_ptr, w->config.img_ptr);
 	w->config.img_ptr = mlx_new_image(w->config.mlx_ptr, 1000, 1000);
 	w->config.data = (int *)mlx_get_data_addr(w->config.img_ptr, &w->config.bpp, &w->config.s_l, &w->config.endian);
-	//get_texture(w);
+
+
+	// ------------- OLD CODE -------------------
 	x = -1;
 	while (++x < WIDTH)
 	{
@@ -155,6 +146,9 @@ void	render_scene(t_game *w)
 			drawend = HEIGHT - 1;
 		verticalline(x, drawstart, drawend, w->gameplay.world[w->raycaster.map[0]][w->raycaster.map[1]], w);
 	}
+	// -----------------------------------------------
+
+
 	mlx_put_image_to_window(w->config.mlx_ptr, w->config.win_ptr, w->config.img_ptr, 0, 0);
 }
 
@@ -162,6 +156,11 @@ void	render_handler(t_game *w)
 {
 	if (!(w->gameplay.world = read_world(w->gameplay.fd)))
 		exit_cleanup(w);
+	int i = 0;
+	while (w->gameplay.world[i] != NULL) {
+		printf("%s\n", w->gameplay.world[i]);
+		i++;
+	}
 	init_gameplay(&w->gameplay);
 	render_scene(w);
 }

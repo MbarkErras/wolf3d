@@ -24,6 +24,7 @@
 # define EXEC_NAME "wolf3d"
 # define WIDTH 1000
 # define HEIGHT 1000
+# define BUF_SIZE 100
 # define X 0
 # define Y 1
 
@@ -34,14 +35,26 @@
 ** GAMEPLAY MACROS
 */
 
+
+// ERROR 1 : chamge the ray direction x -1 (1, 0)
+// Fhad l7ala lmochkil li kain anaho fach kan9elbo ray direction kait9elbo adwaar dyal rotation f button hadi mochkil dyalha hwa map f rendering katban
+// me9louba matalan f had push li pushiit dayro kaichoof f axe dyal Y -1 0 f direction donc f dekchi li kanchofo khass ikoon 3la limen 7it o enface 7it
+// o 3la lisser makain walo f rendering kaikon l3ekss f lisser 7it o enface 7it o limen makain waloo, 3la mafhemt ymkne dekchi kaitrendera me3kouss
+
+// hada machi error ms khassi itgad f parsing tani hwa hna andiro blassa par defaut mniin aybda player donc khass nb9aaw nchofo map wach dook le position
+// li fiha player mafiha 7ta mur o map massgherach mndiir maps
+// O gali rafael bli texture les murs darori f mandatory dayrin photo f mandatory fihom murs b textures
+
 # define FOV 90
 # define INITIAL_POSITION_X 3
-# define INITIAL_POSITION_Y 5
+# define INITIAL_POSITION_Y 3
 # define INITIAL_DIRECTION_X -1
 # define INITIAL_DIRECTION_Y 0
 # define INITIAL_PLANE_X 0
 # define INITIAL_PLANE_Y tan(FOV / 2)
 # define ROT_ANGLE 0.08
+# define NUM_RAYS 320
+# define FOV_ANGLE DEG_TO_RAD(FOV)
 
 /*
 ** TEXTURES MACROS
