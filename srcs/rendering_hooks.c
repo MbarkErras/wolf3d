@@ -6,7 +6,7 @@
 /*   By: merras <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/03 18:32:25 by merras            #+#    #+#             */
-/*   Updated: 2019/11/06 00:41:28 by merras           ###   ########.fr       */
+/*   Updated: 2019/11/17 04:49:51 by merras           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,12 +97,15 @@ void	verticalline(int x, int start, int end, char c, t_game *w)
 	while (++start < end)
 	{
 		i = 1000 * start + x;
+		w->config.data[i] = rand();
+		/*
 		if (c == '1')
 			w->config.data[i] = w->raycaster.side == X ? 0xff0000 : 0x990202;
 		else if (c == '2')
 			w->config.data[i] = w->raycaster.side == X ? 0x00ff00 : 0x016e01;
 		else
 			w->config.data[i] = w->raycaster.side == X ? 0x0000ff : 0x02026e;
+			*/
 	}
 	while (end <= HEIGHT)
 	{
